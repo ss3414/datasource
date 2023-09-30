@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mapper.UserMapper;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,12 +19,12 @@ public class IndexController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public ModelAndView index() {
         return new ModelAndView("/index");
     }
 
-    @GetMapping("/curd")
+    @RequestMapping("/curd")
     public Map curd() {
         /* 主键由雪花算法生成，对表id取余均匀存储 */
 //        for (int i = 1; i <= 10; i++) {

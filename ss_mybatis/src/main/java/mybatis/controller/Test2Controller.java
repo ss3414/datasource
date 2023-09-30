@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +27,7 @@ public class Test2Controller {
 //        Integer id2 = 1; /* 自动装箱 */
 //        Test2 test2 = test2Mapper.selectByInt(id2);
 
-        Map map = new HashMap();
-        return map;
+        return new LinkedHashMap();
     }
 
     @ResponseBody
@@ -44,14 +43,14 @@ public class Test2Controller {
 //        list.add(2);
 //        List<Test2> testList = test2Mapper.selectByList(list);
 
-//        Map map = new HashMap();
+//        Map map = new LinkedHashMap();
 //        map.put("id1", 1);
 //        map.put("id2", 2);
 //        List<Test2> testList = test2Mapper.selectByMap(map);
 
         /* 遍历Map中的集合 */
 //        int[] array = {1, 2};
-//        Map map = new HashMap();
+//        Map map = new LinkedHashMap();
 //        map.put("array2", array);
 //        List<Test2> testList = test2Mapper.selectByMap2(map);
 
@@ -70,13 +69,13 @@ public class Test2Controller {
 //        list.add(t2);
 //        List<Test2> testList = test2Mapper.selectByListObject(list);
 
-//        Map map = new HashMap();
+//        Map map = new LinkedHashMap();
 //        map.put("id1", t1);
 //        map.put("id2", t2);
 //        List<Test2> testList = test2Mapper.selectByMapObject(map);
 
 //        Test2[] array = {t1, t2};
-//        Map map = new HashMap();
+//        Map map = new LinkedHashMap();
 //        map.put("array2", array);
 //        List<Test2> testList = test2Mapper.selectByMapObject2(map);
 
@@ -93,7 +92,7 @@ public class Test2Controller {
 //        select.setSelectList(list);
 //        List<Test2> testList = test2Mapper.selectByObjectList(select);
 
-//        Map map = new HashMap();
+//        Map map = new LinkedHashMap();
 //        map.put("id1", 1);
 //        map.put("id2", 2);
 //        select.setSelectMap(map);
@@ -113,14 +112,13 @@ public class Test2Controller {
 //        select.setSelectList(list);
 //        List<Test2> testList = test2Mapper.selectByObjectListObject(select);
 
-        Map map = new HashMap();
+        Map map = new LinkedHashMap();
         map.put("id1", t1);
         map.put("id2", t2);
         select.setSelectMap(map);
         List<Test2> testList = test2Mapper.selectByObjectMapObject(select);
 
-        Map result = new HashMap();
-        return result;
+        return new LinkedHashMap();
     }
 
     /* todo varchar型时间 */
@@ -132,14 +130,14 @@ public class Test2Controller {
 //        select.setEndTime("2018-12-28");
 //        List<Test2> testList = test2Mapper.selectByCreateTime3(select.getBeginTime(), select.getEndTime());
 
-        Map select = new HashMap();
+        Map select = new LinkedHashMap();
         select.put("beginTime", "2018-12-26");
         select.put("endTime", "2018-12-28");
         List<Test2> testList = test2Mapper.selectByCreateTime4(select);
 
-        Map map = new HashMap();
+        Map map = new LinkedHashMap();
         for (int i = 0; i < testList.size(); i++) {
-            map.put(i + "", testList.get(i).toString());
+            map.put(String.valueOf(i), testList.get(i).toString());
         }
         return map;
     }
@@ -152,8 +150,7 @@ public class Test2Controller {
         select.setCreateTime("2018-12-26");
         List<Test2> testList = test2Mapper.selectByEscape(select);
 
-        Map map = new HashMap();
-        return map;
+        return new LinkedHashMap();
     }
 
     /* todo select count返回值 */
@@ -164,8 +161,7 @@ public class Test2Controller {
 
         List<Test2> testList = test2Mapper.selectCount2();
 
-        Map map = new HashMap();
-        return map;
+        return new LinkedHashMap();
     }
 
 }

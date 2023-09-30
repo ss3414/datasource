@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,8 +42,7 @@ public class Test1Controller {
 //        test1Mapper.insertSelectKey(test);
 //        System.out.println(test.getId());
 
-        Map map = new HashMap();
-        return map;
+        return new LinkedHashMap();
     }
 
     /* todo 强大的动态SQL */
@@ -62,8 +61,7 @@ public class Test1Controller {
 
         List<Test1> testList = test1Mapper.selectByBind(select);
 
-        Map map = new HashMap();
-        return map;
+        return new LinkedHashMap();
     }
 
 }

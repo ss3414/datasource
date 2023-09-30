@@ -8,7 +8,6 @@ import com.module.demo.mapper.UserMapper;
 import com.module.demo.model.User;
 import com.module.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ public class DemoController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user")
+    @RequestMapping("/user")
     public ModelAndView user() {
         ModelAndView view = new ModelAndView();
         User user = userMapper.selectById(1);
@@ -41,17 +40,16 @@ public class DemoController {
 
     /* 多数据源 */
     @DS("servlant")
-    @GetMapping("/dynamic")
+    @RequestMapping("/dynamic")
     public ModelAndView dynamic() {
         ModelAndView view = new ModelAndView();
-        User user = new User();
-        user = userMapper.selectById(1);
+        User user = userMapper.selectById(1);
         view.addObject("user", user);
         view.setViewName("/user");
         return view;
     }
 
-    @GetMapping("/page")
+    @RequestMapping("/page")
     public Map<String, Object> page(@RequestParam(defaultValue = "1") Integer currentPage) {
         Page<User> userPage = new Page<User>();
         userPage.setCurrent(currentPage);
@@ -79,7 +77,7 @@ public class DemoController {
         return map;
     }
 
-    @GetMapping("/update")
+    @RequestMapping("/update")
     public Map<String, Object> update() {
         Map<String, Object> map = new LinkedHashMap<>();
         User user = User.builder().name("name2").password(null).build(); /* 默认null值不更新 */
@@ -87,7 +85,7 @@ public class DemoController {
         return map;
     }
 
-    @GetMapping("/transaction")
+    @RequestMapping("/transaction")
     public Map<String, Object> transaction() {
         Map<String, Object> map = new LinkedHashMap<>();
         userService.transaction();

@@ -6,7 +6,6 @@ import com.util.CustomCacheUtil;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,19 +26,19 @@ public class IndexController {
     @Autowired
     private CacheManager cacheManager;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public ModelAndView index() {
         return new ModelAndView("/index");
     }
 
     /* 自定义缓存（ConcurrentHashMap+读写锁） */
-    @GetMapping("/custom")
+    @RequestMapping("/custom")
     public Map<String, Object> custom() {
         return new LinkedHashMap<>(CustomCacheUtil.getCache());
     }
 
     /* fixme 一级缓存 */
-    @GetMapping("/first")
+    @RequestMapping("/first")
     public Map<String, Object> first() {
         userMapper.selectById(1);
         userMapper.selectById(1);
@@ -47,7 +46,7 @@ public class IndexController {
     }
 
     /* 二级缓存 */
-    @GetMapping("/second")
+    @RequestMapping("/second")
     public Map<String, Object> second() {
         userService.selectOne(1);
         userService.selectOne(1);
@@ -55,7 +54,7 @@ public class IndexController {
     }
 
     /* EhCache+加锁 */
-    @GetMapping("/ehcache")
+    @RequestMapping("/ehcache")
     public Map<String, Object> ehcache() {
         Cache cache = cacheManager.getCache("user");
         System.out.println(cache.get("map").getObjectValue());

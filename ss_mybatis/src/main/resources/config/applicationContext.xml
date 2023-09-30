@@ -36,7 +36,6 @@
         <property name="proxyFilters" ref="slowFilter"/>
     </bean>
 
-    <!-- fixme Druid监控数据无法持久化 -->
     <bean id="slowFilter" class="com.alibaba.druid.filter.stat.StatFilter">
         <property name="slowSqlMillis" value="100"/><!-- 超过100毫秒即为慢查询 -->
         <property name="logSlowSql" value="true"/>

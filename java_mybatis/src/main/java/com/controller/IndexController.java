@@ -33,10 +33,9 @@ public class IndexController {
 
     @ResponseBody
     @RequestMapping("/transaction")
-    public Map<String, Object> transaction() {
+    public Map transaction() {
         userService.transaction();
-        Map<String, Object> map = new LinkedHashMap<>();
-        return map;
+        return new LinkedHashMap();
     }
 
 }

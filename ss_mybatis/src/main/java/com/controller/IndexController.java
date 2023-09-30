@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class IndexController {
         /* PageHelper分页插件 */
         PageHelper.startPage(currentPage, 2);
         List<User> userList = userMapper.selectAll();
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("userList", userList);
         return map;
     }
@@ -51,7 +51,7 @@ public class IndexController {
     @RequestMapping("/cache")
     public Map<String, Object> cache() {
         List<User> userList = userMapper.selectAll();
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("userList", userList);
         return map;
     }
@@ -61,7 +61,7 @@ public class IndexController {
     @RequestMapping("/update")
     public Map<String, Object> update() {
         int result = userMapper.insert(User.builder().build());
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
         map.put("result", result);
         return map;
     }
