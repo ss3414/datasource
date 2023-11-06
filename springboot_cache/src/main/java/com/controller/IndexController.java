@@ -1,10 +1,8 @@
 package com.controller;
 
 import com.mapper.UserMapper;
-import com.service.UserService;
+import com.model.User;
 import com.util.CustomCacheUtil;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +18,6 @@ public class IndexController {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private CacheManager cacheManager;
-
     @RequestMapping("/")
     public ModelAndView index() {
         return new ModelAndView("/index");
@@ -37,27 +29,22 @@ public class IndexController {
         return new LinkedHashMap<>(CustomCacheUtil.getCache());
     }
 
-    /* fixme 一级缓存 */
-    @RequestMapping("/first")
-    public Map<String, Object> first() {
-        userMapper.selectById(1);
-        userMapper.selectById(1);
+    /* 缓存 */
+    @RequestMapping("/select")
+    public String select() {
+        User user = userMapper.selectById(1);
+        return user.toString();
+    }
+
+    @RequestMapping("/update")
+    public Map<String, Object> update() {
+        userMapper.updateById(User.builder().id(1).name("name123").password("pwd").build());
         return new LinkedHashMap<>();
     }
 
-    /* 二级缓存 */
-    @RequestMapping("/second")
-    public Map<String, Object> second() {
-        userService.selectOne(1);
-        userService.selectOne(1);
-        return new LinkedHashMap<>();
-    }
-
-    /* EhCache+加锁 */
-    @RequestMapping("/ehcache")
-    public Map<String, Object> ehcache() {
-        Cache cache = cacheManager.getCache("user");
-        System.out.println(cache.get("map").getObjectValue());
+    @RequestMapping("/delete")
+    public Map<String, Object> delete() {
+        userMapper.deleteById(2);
         return new LinkedHashMap<>();
     }
 

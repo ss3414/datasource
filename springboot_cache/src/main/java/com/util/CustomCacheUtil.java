@@ -1,21 +1,21 @@
 package com.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-//@Order(1)
-//@Component
+@Slf4j
+@Order(1)
+@Component
 public class CustomCacheUtil implements ApplicationRunner {
-
-    private static Log logger = LogFactory.getLog(CustomCacheUtil.class);
 
     private static ConcurrentHashMap<String, Object> map = new ConcurrentHashMap<>();
 
@@ -45,7 +45,7 @@ public class CustomCacheUtil implements ApplicationRunner {
          * */
         try {
             lock.writeLock().lock();
-            logger.info("CustomCacheUtil update");
+            log.info("CustomCacheUtil update");
             TimeUnit.SECONDS.sleep(5);
             map.clear();
             map.put("key2", "value2");

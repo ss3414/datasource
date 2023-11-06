@@ -46,24 +46,4 @@ public class IndexController {
         return map;
     }
 
-    /* 缓存 */
-    @ResponseBody
-    @RequestMapping("/cache")
-    public Map<String, Object> cache() {
-        List<User> userList = userMapper.selectAll();
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("userList", userList);
-        return map;
-    }
-
-    /* 清除缓存 */
-    @ResponseBody
-    @RequestMapping("/update")
-    public Map<String, Object> update() {
-        int result = userMapper.insert(User.builder().build());
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("result", result);
-        return map;
-    }
-
 }

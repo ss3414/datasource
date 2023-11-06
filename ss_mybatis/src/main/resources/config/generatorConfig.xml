@@ -5,9 +5,6 @@
     <!-- 引入外部配置，通过${property}方式调用 -->
     <properties resource="config/application.properties"/>
 
-    <!-- 引入MySQL驱动（通过Maven运行MBG，直接在Maven中引入） -->
-    <!--<classPathEntry location="mysql-connector-java-5.1.38.jar"/>-->
-
     <!--
     ①targetRuntime
     MyBatis3Simple：不生成和Example查询有关的内容（Example可以用来生成一个几乎无限的where子句）

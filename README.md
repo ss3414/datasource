@@ -54,7 +54,10 @@ MyBatis注解/XML+CURD/关联<br>
 
 # springboot_cache
 ConcurrentHashMap自定义缓存<br>
-MBP二级缓存+Ehcache：@EnableCaching+@CacheConfig+@Cacheable+ehcache.xml<br>
+MBP+Ehcache：@EnableCaching+@CacheConfig+@Cacheable+ehcache.xml<br>
+
+# springboot_caffeine
+Caffeine缓存<br>
 
 # sharding_mybatisplus
 MBP+ShardingJDBC<br>

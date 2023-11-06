@@ -11,13 +11,13 @@
         <td><a href="/custom">custom</a></td>
     </tr>
     <tr>
-        <td><a href="/first">first</a></td>
+        <td><a href="/select">select</a></td>
     </tr>
     <tr>
-        <td><a href="/second">second</a></td>
+        <td><a href="/update">update</a></td>
     </tr>
     <tr>
-        <td><a href="/ehcache">ehcache</a></td>
+        <td><a href="/delete">delete</a></td>
     </tr>
 </table>
 

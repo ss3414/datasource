@@ -16,12 +16,6 @@
         <td><a href="/userPage">UserPage</a></td>
     </tr>
     <tr>
-        <td><a href="/cache">缓存</a></td>
-    </tr>
-    <tr>
-        <td><a href="/update">更新缓存</a></td>
-    </tr>
-    <tr>
         <td><a href="/druid/index.html">Druid监控</a></td>
     </tr>
 </table>

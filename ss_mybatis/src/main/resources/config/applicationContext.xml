@@ -2,13 +2,10 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/cache
-       http://www.springframework.org/schema/cache/spring-cache.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--
     ①@Repository/@Service/@Component由Spring扫描
@@ -75,19 +72,5 @@
         <property name="basePackage" value="*.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-
-    <!--************************************************************分割线************************************************************-->
-
-    <!-- 配置EhCache+CacheManager+注解配置 -->
-    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:config/ehcache.xml"/>
-    </bean>
-
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="ehcache"/><!-- ref而非value（XML配置装配错误） -->
-    </bean>
-
-    <!-- 启用注解配置缓存 -->
-    <cache:annotation-driven cache-manager="cacheManager"/>
 
 </beans>
