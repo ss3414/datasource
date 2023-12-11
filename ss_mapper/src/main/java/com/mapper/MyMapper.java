@@ -10,5 +10,4 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * ③项目中通用的方法再通过MyMapper<T>包装一下又可以复用
  * */
 public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
-
 }

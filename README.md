@@ -29,21 +29,13 @@ Ehcache（Spring配置+ehcache.xml）<br>
 PageHelper插件<br>
 MyMapper需要单独配置<br>
 
-# ss_mybatisplus
-①MBP+MBP Generator（slf4j-api/freemarker/lombok）<br>
-②Spring/SpringMVC整合MyBatis-Plus3<br>
-在Spring中配置SqlSessionFactoryBean（MBP版）/MapperScannerConfigurer<br>
-分页插件<br>
-
 # springboot_mybatis
-①MyBatis+pagehelper<br>
-②归档<br>
 MyBatis注解/XML+CURD/关联<br>
 
 # springboot_mybatisplus
-①MBP+MBP Generator（freemarker/lombok）<br>
-推荐写法：DataSourceConfig（model/mapper/XML/分页）<br>
-传统写法：Application（mapper/分页）+application.properties（XML）<br>
+①MBP<br>
+推荐写法：DataSourceConfig（model/mapper/XML）<br>
+传统写法：Application（mapper）+application.properties（XML）<br>
 ②多数据源/事务<br>
 
 # springboot_jpa

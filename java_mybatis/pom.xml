@@ -54,7 +54,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.0.2</version>
+            <version>1.1.10</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -95,12 +95,12 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.83</version>
+            <version>2.0.43</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>1.18.30</version>
         </dependency>
 
         <!-- 日志+测试 -->
@@ -112,7 +112,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.5.2</version>
+            <version>5.6.2</version>
         </dependency>
 
     </dependencies>

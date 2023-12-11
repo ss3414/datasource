@@ -26,8 +26,6 @@ public class IndexController {
         return new ModelAndView("/index");
     }
 
-    /************************************************************分割线************************************************************/
-
     @Autowired
     private UserDao userDao;
 
