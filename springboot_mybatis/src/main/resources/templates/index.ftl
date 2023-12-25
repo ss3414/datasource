@@ -11,9 +11,6 @@
         <td><a href="/curd">curd</a></td>
     </tr>
     <tr>
-        <td><a href="/userPage">userPage</a></td>
-    </tr>
-    <tr>
         <td><a href="/related">related</a></td>
     </tr>
     <tr>

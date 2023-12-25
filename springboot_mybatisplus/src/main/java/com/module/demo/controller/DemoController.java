@@ -51,7 +51,7 @@ public class DemoController {
 
     @RequestMapping("/page")
     public Map<String, Object> page(@RequestParam(defaultValue = "1") Integer currentPage) {
-        Page<User> userPage = new Page<User>();
+        Page<User> userPage = new Page<>();
         userPage.setCurrent(currentPage);
         userPage.setSize(1);
         IPage<User> userList = userMapper.selectPage(userPage, new QueryWrapper<User>().lambda().eq(User::getName, "name123"));
@@ -59,7 +59,7 @@ public class DemoController {
 //                userPage, new QueryWrapper<User>().in("", Arrays.asList(""))
 //                        .eq("name", "name123"));
 
-        User user = new User();
+        User user = User.builder().build();
         user.setName("name123");
         List<User> userList2 = userService.selectPageByUser(userPage, user); /* 自定义分页 */
 

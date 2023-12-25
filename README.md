@@ -3,12 +3,6 @@
 
 ************************************************************************************************************************
 
-# java_mybatis
-①Java直接整合MyBatis<br>
-在Java中直接使用MyBatis框架需要读取配置，手动构造SqlSessionFactory/SqlSession<br>
-②Spring整合MyBatis（传统写法）<br>
-事务<br>
-
 # ss_mybatis
 ①JDK6<br>
 ②Spring/SpringMVC整合原生MyBatis<br>

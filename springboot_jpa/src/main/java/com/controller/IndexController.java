@@ -133,7 +133,6 @@ public class IndexController {
 
 //        /* fixme 删除（关联的user_role没有删除） */
 //        roleDao.deleteById(1);
-
         return new LinkedHashMap();
     }
 

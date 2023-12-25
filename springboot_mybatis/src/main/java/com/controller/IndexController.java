@@ -1,17 +1,14 @@
 package com.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.mapper.RoleMapper;
 import com.mapper.UserMapper;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,17 +32,6 @@ public class IndexController {
         return new LinkedHashMap();
     }
 
-    @RequestMapping("/userPage")
-    public Map userPage(@RequestParam(defaultValue = "1") Integer currentPage) {
-        /* PageHelper分页插件 */
-        PageHelper.startPage(currentPage, 2);
-        List<User> userList = userMapper.selectList();
-
-        Map map = new LinkedHashMap();
-        map.put("result", userList.size());
-        return map;
-    }
-
     @Autowired
     private RoleMapper roleMapper;
 
@@ -63,7 +49,6 @@ public class IndexController {
         /* XML关联 */
 //        List<Role> roleList = roleMapper.selectListByUserId2(1);
         User user = userMapper.selectRelatedOne2(1);
-
         return new LinkedHashMap();
     }
 

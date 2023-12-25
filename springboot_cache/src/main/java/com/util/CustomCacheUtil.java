@@ -17,9 +17,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Component
 public class CustomCacheUtil implements ApplicationRunner {
 
-    private static ConcurrentHashMap<String, Object> map = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Object> map = new ConcurrentHashMap<>();
 
-    private static ReadWriteLock lock = new ReentrantReadWriteLock();
+    private static final ReadWriteLock lock = new ReentrantReadWriteLock();
 
     public static ConcurrentHashMap<String, Object> getCache() {
         lock.readLock().lock();
