@@ -23,27 +23,22 @@ Ehcache（Spring配置+ehcache.xml）<br>
 PageHelper插件<br>
 MyMapper需要单独配置<br>
 
-# springboot_mybatis
-MyBatis注解/XML+CURD/关联<br>
-
-# springboot_mybatisplus
+# springboot3_mybatisplus
 ①MBP<br>
 推荐写法：DataSourceConfig（model/mapper/XML）<br>
 传统写法：Application（mapper）+application.properties（XML）<br>
 ②多数据源/事务<br>
 
-# springboot_jpa
+# springboot3_jpa
 事务（@EnableTransactionManagement+@Transactional）<br>
 关联（多对多：双向关联+关联插入/更新/查询）<br>
 
 ******************************************************************************************
 
-# springboot_cache
-ConcurrentHashMap自定义缓存<br>
-MBP+Ehcache：@EnableCaching+@CacheConfig+@Cacheable+ehcache.xml<br>
-
-# springboot_caffeine
+# springboot3_caffeine
 Caffeine缓存<br>
+ConcurrentHashMap自定义缓存<br>
+@EnableCaching+@CacheConfig<br>
 
 # sharding_mybatisplus
 MBP+ShardingJDBC<br>

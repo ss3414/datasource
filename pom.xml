@@ -4,11 +4,9 @@
 
     <modules>
         <module>sharding_mybatisplus</module>
-        <module>springboot_cache</module>
-        <module>springboot_caffeine</module>
-        <module>springboot_jpa</module>
-        <module>springboot_mybatis</module>
-        <module>springboot_mybatisplus</module>
+        <module>springboot3_caffeine</module>
+        <module>springboot3_jpa</module>
+        <module>springboot3_mybatisplus</module>
         <module>ss_mapper</module>
         <module>ss_mybatis</module>
     </modules>

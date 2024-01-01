@@ -1,0 +1,36 @@
+# ************************************************************分割线************************************************************
+
+server:
+  port: 80
+
+spring:
+  freemarker:
+    suffix: .ftl
+    template-loader-path: classpath:/templates
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      grace-destroy: false
+      datasource:
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/untitled?useSSL=false&characterEncoding=utf-8
+          username: root
+          password: 2468
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        servlant:
+          url: jdbc:mysql://127.0.0.1:3306/python?useSSL=false&characterEncoding=utf-8
+          username: root
+          password: 2468
+          driver-class-name: com.mysql.cj.jdbc.Driver
+
+# MBP
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+# 日志
+logging:
+  level:
+    com:
+      demo:
+        mapper: DEBUG
