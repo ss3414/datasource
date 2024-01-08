@@ -4,9 +4,9 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.demo.service.UserService;
 import com.demo.mapper.UserMapper;
 import com.demo.model.User;
+import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +32,6 @@ public class DemoController {
     public ModelAndView user() {
         ModelAndView view = new ModelAndView();
         User user = userMapper.selectById(1);
-        user = user.selectById(1); /* ActiveRecord */
         view.addObject("user", user);
         view.setViewName("/user");
         return view;
@@ -87,6 +86,13 @@ public class DemoController {
     @RequestMapping("/transaction")
     public Map<String, Object> transaction() {
         userService.transaction();
+        return new LinkedHashMap<>();
+    }
+
+    @RequestMapping("/test")
+    public Map<String, Object> test() {
+//        var list = userMapper.selectMapList("name1");
+        var list2 = userMapper.selectList(new QueryWrapper<>());
         return new LinkedHashMap<>();
     }
 
