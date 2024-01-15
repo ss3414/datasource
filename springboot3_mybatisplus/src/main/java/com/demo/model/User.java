@@ -1,20 +1,21 @@
 package com.demo.model;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import org.apache.ibatis.type.BlobTypeHandler;
+
+import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName("user")
+@TableName(value = "user", autoResultMap = true)
 public class User extends Model<User> {
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -22,14 +23,15 @@ public class User extends Model<User> {
 
     private String name;
 
-    /* 二进制使用Object而非Blob，返回的是byte数组 */
-//    private Object password;
+    /* 二进制 */
+    @TableField(typeHandler = BlobTypeHandler.class)
+    private byte[] password;
 
-    /* fixme 类型转换失败 */
-    @TableField(typeHandler = JacksonTypeHandler.class)
-    private JSONObject password;
+    /* 类型转换，实体类需要包含构造器 */
+//    @TableField(typeHandler = FastjsonTypeHandler.class)
+//    private JSONObject password;
 
-//    @TableField(exist = false)
-//    private List nameList;
+    @TableField(exist = false)
+    private List nameList;
 
 }

@@ -23,7 +23,7 @@
         <td><a href="/transaction">事务</a></td>
     </tr>
     <tr>
-        <td><a href="/async">异步</a></td>
+        <td><a href="/test">测试</a></td>
     </tr>
 </table>
 

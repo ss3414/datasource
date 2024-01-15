@@ -30,7 +30,7 @@ public class Caffeine {
 
     @RequestMapping("/find")
     public String find() {
-        User user = userDao.findById(1).get();
+        User user = userDao.findById(1).orElseGet(() -> User.builder().build());
         return user.toString();
     }
 

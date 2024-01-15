@@ -7,12 +7,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.mapper.UserMapper;
 import com.demo.model.User;
 import com.demo.service.UserService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -89,10 +92,18 @@ public class DemoController {
         return new LinkedHashMap<>();
     }
 
+    @SneakyThrows
     @RequestMapping("/test")
     public Map<String, Object> test() {
-//        var list = userMapper.selectMapList("name1");
-        var list2 = userMapper.selectList(new QueryWrapper<>());
+        /* 写二进制 */
+//        var bytes = Files.readAllBytes(Paths.get("C:/Users/Administrator/Desktop/test.jpg"));
+//        var user = User.builder().password(bytes).build();
+//        userMapper.insert(user);
+
+        /* 读二进制 */
+        var user = userMapper.selectOne(new QueryWrapper<>());
+        var file = new File("C:/Users/Administrator/Desktop/test2.jpg");
+        Files.write(file.toPath(), user.getPassword());
         return new LinkedHashMap<>();
     }
 
