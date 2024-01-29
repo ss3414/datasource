@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.*;
-import org.apache.ibatis.type.BlobTypeHandler;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -23,13 +23,20 @@ public class User extends Model<User> {
 
     private String name;
 
+//    private String password;
+
     /* 二进制 */
-    @TableField(typeHandler = BlobTypeHandler.class)
-    private byte[] password;
+//    @TableField(typeHandler = BlobTypeHandler.class)
+//    private byte[] password;
 
     /* 类型转换，实体类需要包含构造器 */
 //    @TableField(typeHandler = FastjsonTypeHandler.class)
 //    private JSONObject password;
+
+    private Date password;
+
+//    @Version
+//    private Integer version;
 
     @TableField(exist = false)
     private List nameList;

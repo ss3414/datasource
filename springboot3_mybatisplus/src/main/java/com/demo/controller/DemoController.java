@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,30 +50,36 @@ public class DemoController {
 
     @RequestMapping("/page")
     public Map<String, Object> page(@RequestParam(defaultValue = "1") Integer currentPage) {
-        Page<User> userPage = new Page<>();
-        userPage.setCurrent(currentPage);
-        userPage.setSize(1);
-        IPage<User> userList = userMapper.selectPage(userPage, new QueryWrapper<User>().lambda().eq(User::getName, "name123"));
-//        IPage<User> userList = userMapper.selectPage(
-//                userPage, new QueryWrapper<User>().in("", Arrays.asList(""))
-//                        .eq("name", "name123"));
+        Page<User> page = new Page<>();
+        page.setCurrent(currentPage);
+        page.setSize(1);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(User::getName, "name123");
+        IPage<User> userList = userMapper.selectPage(page, queryWrapper);
 
-        User user = User.builder().build();
-        user.setName("name123");
-        List<User> userList2 = userService.selectPageByUser(userPage, user); /* 自定义分页 */
+        /* 流式查询 */
+        userMapper.selectList(queryWrapper, result -> {
+            var count = result.getResultCount();
+            var user = result.getResultObject();
+            System.out.println(count + ":" + user.toString());
+        });
 
+        /* 自定义分页 */
+//        User user = User.builder().build();
+//        user.setName("name123");
+//        List<User> userList2 = userService.selectPageByUser(page, user);
+
+        /* 批量插入 */
 //        userList2.forEach(e -> e.setId(null));
-//        userService.saveBatch(userList2); /* 批量插入 */
+//        userService.saveBatch(userList);
 
         /* 查询集合（in） */
-        List<String> nameList = new ArrayList<>();
-        nameList.add("name123");
-        nameList.add("name456");
-        List<User> userList3 = userMapper.selectList(new QueryWrapper<User>().lambda().in(User::getName, nameList));
+//        List<String> nameList = new ArrayList<>();
+//        nameList.add("name123");
+//        nameList.add("name456");
+//        List<User> userList3 = userMapper.selectList(new QueryWrapper<User>().lambda().in(User::getName, nameList));
 
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put("result", userList.getSize());
-        return map;
+        return new LinkedHashMap<>();
     }
 
     @RequestMapping("/update")
@@ -101,9 +104,23 @@ public class DemoController {
 //        userMapper.insert(user);
 
         /* 读二进制 */
-        var user = userMapper.selectOne(new QueryWrapper<>());
-        var file = new File("C:/Users/Administrator/Desktop/test2.jpg");
-        Files.write(file.toPath(), user.getPassword());
+//        var user = userMapper.selectOne(new QueryWrapper<>());
+//        var file = new File("C:/Users/Administrator/Desktop/test2.jpg");
+//        Files.write(file.toPath(), user.getPassword());
+
+        /* 时间范围查询 */
+        LocalDateTime start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.lambda().between(User::getPassword, start, end);
+//        queryWrapper.lambda().isNull(User::getPassword).and(qw -> qw.notBetween(User::getPassword, start, end));
+        queryWrapper.lambda().isNull(User::getPassword).or().notBetween(User::getPassword, start, end);
+        var users = userMapper.selectList(queryWrapper);
+
+        /* 乐观锁 */
+//        var user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 1));
+//        user.setName("user123");
+//        userMapper.updateById(user);
         return new LinkedHashMap<>();
     }
 
