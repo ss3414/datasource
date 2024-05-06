@@ -1,13 +1,11 @@
 package com.demo.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.demo.config.MyJacksonTypeHandler;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -33,7 +31,18 @@ public class User extends Model<User> {
 //    @TableField(typeHandler = FastjsonTypeHandler.class)
 //    private JSONObject password;
 
-    private Date password;
+    /* 类型转换，实体类需要包含构造器 */
+    @TableField(typeHandler = MyJacksonTypeHandler.class)
+    private Password password;
+
+//    private Date password;
+
+    /* 自动填充时间 */
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
 
 //    @Version
 //    private Integer version;

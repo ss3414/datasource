@@ -27,6 +27,10 @@ spring:
 # MBP
 mybatis-plus:
   mapper-locations: classpath*:mapper/*Mapper.xml
+  global-config:
+    db-config:
+      insert-strategy: not_null
+      update-strategy: not_null
 
 # 日志
 logging:

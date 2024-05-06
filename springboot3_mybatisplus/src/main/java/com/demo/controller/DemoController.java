@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.demo.mapper.UserMapper;
+import com.demo.model.Password;
 import com.demo.model.User;
 import com.demo.service.UserService;
 import lombok.SneakyThrows;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -98,6 +98,17 @@ public class DemoController {
     @SneakyThrows
     @RequestMapping("/test")
     public Map<String, Object> test() {
+        /* JSON */
+        var password = Password.builder().pwdKey("pwd").build();
+        var user = User.builder().password(password).build();
+        userMapper.insert(user);
+        user.setName("user");
+        userMapper.updateById(user);
+
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.apply("JSON_EXTRACT(password, '$.key') = 'val'");
+//        var users = userMapper.selectList(queryWrapper);
+
         /* 写二进制 */
 //        var bytes = Files.readAllBytes(Paths.get("C:/Users/Administrator/Desktop/test.jpg"));
 //        var user = User.builder().password(bytes).build();
@@ -109,13 +120,13 @@ public class DemoController {
 //        Files.write(file.toPath(), user.getPassword());
 
         /* 时间范围查询 */
-        LocalDateTime start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
-        LocalDateTime end = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0);
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        LocalDateTime start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+//        LocalDateTime end = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59).withNano(0);
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.lambda().between(User::getPassword, start, end);
 //        queryWrapper.lambda().isNull(User::getPassword).and(qw -> qw.notBetween(User::getPassword, start, end));
-        queryWrapper.lambda().isNull(User::getPassword).or().notBetween(User::getPassword, start, end);
-        var users = userMapper.selectList(queryWrapper);
+//        queryWrapper.lambda().isNull(User::getPassword).or().notBetween(User::getPassword, start, end);
+//        var users = userMapper.selectList(queryWrapper);
 
         /* 乐观锁 */
 //        var user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 1));

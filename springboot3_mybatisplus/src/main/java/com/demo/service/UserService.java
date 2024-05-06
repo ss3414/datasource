@@ -20,7 +20,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         return userMapper.selectPageByUser(page, user);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void transaction() {
         userMapper.insert(User.builder().build());
         String name = "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111";
