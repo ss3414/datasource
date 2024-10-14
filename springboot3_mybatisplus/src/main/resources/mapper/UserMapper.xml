@@ -11,7 +11,8 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, password
+        id
+        , name, password
     </sql>
 
     <select id="selectPageByUser" parameterType="com.demo.model.User" resultMap="BaseResultMap">
@@ -19,6 +20,24 @@
         <include refid="Base_Column_List"/>
         FROM user
         WHERE name LIKE #{user.name}
+    </select>
+
+    <resultMap id="UserRoleResultMap" type="com.demo.model.UserRole">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password" typeHandler="com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler"/>
+        <collection property="roleList" ofType="com.demo.model.Role" column="id" select="selectRoleList"/>
+    </resultMap>
+
+    <select id="selectUserRoleList" resultMap="UserRoleResultMap">
+        SELECT *
+        FROM user
+    </select>
+
+    <select id="selectRoleList" resultType="com.demo.model.Role">
+        SELECT *
+        FROM role
+        WHERE user_id = #{id}
     </select>
 
 </mapper>

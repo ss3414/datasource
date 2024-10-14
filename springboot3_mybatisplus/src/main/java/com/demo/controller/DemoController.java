@@ -4,8 +4,8 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.demo.config.UserRoleResultHandler;
 import com.demo.mapper.UserMapper;
-import com.demo.model.Password;
 import com.demo.model.User;
 import com.demo.service.UserService;
 import lombok.SneakyThrows;
@@ -27,6 +27,9 @@ public class DemoController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRoleResultHandler userRoleResultHandler;
 
     @RequestMapping("/user")
     public ModelAndView user() {
@@ -99,11 +102,11 @@ public class DemoController {
     @RequestMapping("/test")
     public Map<String, Object> test() {
         /* JSON */
-        var password = Password.builder().pwdKey("pwd").build();
-        var user = User.builder().password(password).build();
-        userMapper.insert(user);
-        user.setName("user");
-        userMapper.updateById(user);
+//        var password = com.demo.model.Password.builder().pwdKey("pwd").build();
+//        var user = User.builder().password(password).build();
+//        userMapper.insert(user);
+//        user.setName("user");
+//        userMapper.updateById(user);
 
 //        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.apply("JSON_EXTRACT(password, '$.key') = 'val'");
@@ -132,6 +135,9 @@ public class DemoController {
 //        var user = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, 1));
 //        user.setName("user123");
 //        userMapper.updateById(user);
+
+        /* 一对多映射 */
+        var users = userMapper.selectUserRoleList(userRoleResultHandler);
         return new LinkedHashMap<>();
     }
 
